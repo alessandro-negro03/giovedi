@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cstdlib>
+#define DIMENSIONE 30
+using namespace std;
+/*13 Caricare in un vettore N numeri dispari (N<=50) e successivamente inserire in un secondo vettore tutti i valori del primo che 
+risultino multipli di un valore X acquisito inizialmente. Visualizzare il secondo vettore così ottenuto.
+Utilizzare le funzioni di leggi_vettore()   e multiplo() e tutte le funzioni che si ritiene opportune per strutturare il problema   */
+
+
+
+//questa è la prototipazione : dichiaro le funzioni che usero
+void leggi_vettore(int vettore[]);
+int leggi_multiplo();
+bool multiplo(int numero, int n_multiplo);
+// qua faccio un esempio di overload
+void visualizza(int vettore[]);
+void visualizza(int vettore[],int dimensione);
+
+int main()
+{
+	int vettore1[DIMENSIONE],vettore2[DIMENSIONE];
+	int numero, elementi=0;
+	
+	leggi_vettore(vettore1);
+	visualizza(vettore1);
+	int num_mul = leggi_multiplo();
+    // e qui faccio la costruzione del secondo
+    for(int i=0; i<DIMENSIONE; i++)
+    {
+    	if (multiplo(vettore1[i],num_mul))  
+				{
+    			vettore2[elementi]=vettore1[i];	
+				elementi++;				
+				}	
+	}
+	visualizza(vettore2,elementi);
+    
+    
+    
+}
+
+// e qua scrivo il codice delle funzioni 
+
+
+int leggi_multiplo()
+{int num_mul;
+cout << "Inserisci il numero da controllare ";
+cin >> num_mul;
+return (num_mul);
+}
+
+bool multiplo(int da_controllare,int multiplo )
+{
+	return ((da_controllare%multiplo)==0);
+}
+
+
+void visualizza(int vettore[])
+{
+	for(int i=0; i<DIMENSIONE; i++) {
+	cout << vettore[i] << "\t";}
+	cout << endl;
+}
+//esempio di overload che avrei potuto anche fare con un default
+void visualizza(int vettore[],int lunghezza=DIMENSIONE)
+{
+	for(int i=0; i<lunghezza; i++) {
+	cout << vettore[i] << "\t";}
+	cout << endl;
+}
+
+
+// usiamo una funzione di generazione casuale per simulare una lettura 
+void leggi_vettore(int vettore[])
+{
+	for(int i=0; i<DIMENSIONE; i++) {
+	vettore[i]=(2*rand()%10)+1;
+	//vettore[i]=10; //questo crea un array di numeri uguali
+	//vettore[i]=i+2;
+	}
+}
