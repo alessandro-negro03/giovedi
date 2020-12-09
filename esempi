@@ -1,0 +1,56 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h> 
+
+const int N = 100;
+
+using namespace std;
+
+void fill_array(int array[]);
+void read_array(int array[]);
+void find_max(int array[]);
+
+int main() {
+	int numbers[N];
+	
+	// fill array with random numbers
+	fill_array(numbers);
+	
+	// array with all the numbers
+	read_array(numbers);
+	
+	// find max number and any multiple occurencies
+	find_max(numbers);
+	
+    return 0;
+}
+
+void fill_array(int array[]) {
+	srand(time(NULL));
+	
+	for (int i = 0; i < N; i++) {
+		array[i] = rand() % 100;
+	}
+}
+
+void read_array(int array[]) {
+	for (int i = 0; i < N; i++) {
+		cout << "Number: " << array[i] << endl;
+	}
+}
+
+void find_max(int array[]) {
+	int max = array[0];
+	int occurencies = 1;
+	for (int i = 0; i < N; i++) {
+		if (array[i] > max) {
+			max = array[i];
+		} else if (array[i] == max) {
+			occurencies++;
+		}
+	}
+	
+	cout << "--------------------------------" << endl;
+	cout << "Maximum value: " << max << endl;
+	cout << "Occurencies: " << occurencies;
+}
