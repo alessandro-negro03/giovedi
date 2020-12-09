@@ -1,0 +1,80 @@
+#include <iostream>
+#include <cstdlib>
+#define DIMENSIONE 30
+using namespace std;
+/*12 Leggere in input un vettore di interi di dimensione N (N <=100) e successivamente crearne un
+secondo contenente tutti gli elementi del primo che risultano essere minori della media degli elementi del primo compresi tra -100 e + 100.
+Utilizzare le funzioni di leggi_vettore()   e media() e tutte le funzioni che si ritiene opportune per strutturare il problema  */
+
+// nelle funzioni tutto quello che non c'è lo posso inventare ad esempio gli argomenti 
+
+//questa è la prototipazione : dichiaro le funzioni che usero
+void leggi_vettore(int vettore[]);
+int	 media(int vettore[]);
+// qua faccio un esempio di overload
+void visualizza(int vettore[]);
+void visualizza(int vettore[],int dimensione);
+
+int main()
+{
+	int vettore1[DIMENSIONE],vettore2[DIMENSIONE];
+	int numero, elementi=0;
+	
+	leggi_vettore(vettore1);
+	visualizza(vettore1);
+	int n_medio = media(vettore1);
+	cout << "Media " << n_medio << endl;
+    // e qui faccio la costruzione del secondo
+    for(int i=0; i<DIMENSIONE; i++)
+    {
+    	if (vettore1[i]<n_medio) 
+				{
+    			vettore2[elementi]=vettore1[i];	
+				elementi++;				
+				}	
+	}
+	visualizza(vettore2,elementi);
+    
+    
+    
+}
+
+// e qua scrivo il codice delle funzioni 
+
+
+int media(int vettore[])
+{
+int inclusi=0,totale=0;
+for(int i=0; i<DIMENSIONE; i++)
+	{
+	if ((vettore[i]>-100)&&(vettore[i]<100)) {
+					totale+=vettore[i];
+					inclusi++;
+	}	
+	}
+
+return (totale/inclusi);
+}
+
+void visualizza(int vettore[])
+{
+	for(int i=0; i<DIMENSIONE; i++) {
+	cout << vettore[i] << tab;}
+}
+//esempio di overload che avrei potuto anche fare con un default
+void visualizza(int vettore[],int lunghezza=DIMENSIONE)
+{
+	for(int i=0; i<lunghezza; i++) {
+	cout << vettore[i] << tab;}
+}
+
+
+// usiamo una funzione di generazione casuale per simulare una lettura 
+void leggi_vettore(int vettore[])
+{
+	for(int i=0; i<DIMENSIONE; i++) {
+	vettore[i]=rand()%250-150;
+	//vettore[i]=10; //questo crea un array di numeri uguali
+	//vettore[i]=i+2;
+	}
+}
